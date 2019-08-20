@@ -7,3 +7,13 @@ html,body{
     font-size: 1em;
     background: #ccc;
 }
+.bg-dark{
+    background-color: #210ab0a3 !important;
+}
+.navbar-nav{
+    flex-direction: row;
+}
+.nav-item{
+    margin-left: 10px;
+    padding:0 10px;
+}
