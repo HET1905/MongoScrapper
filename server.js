@@ -60,33 +60,35 @@ app.use(routes);
 // A GET route for scraping the echoJS website
 
 app.get("/scrapArticles", function (req, res) {
-    axios.get("https://www.bbc.com/news").then(function (response) {
+    axios.get("https://www.nytimes.com/section/technology").then(function (response) {
         var $ = cheerio.load(response.data);
+        // console.log(response.data);
 
-        $("div .gs-c-promo-body").each(function (i, element) {
+        $(".css-imuvyx").each(function (i, element) {
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
             result.title = $(this)
-                .children("h3 .gs-c-promo-heading__title")
+                .find("h2")
                 .text().trim();
             result.link = $(this)
-                .children("a .gs-c-promo-heading")
+                .find("a")
                 .attr("href");
             result.paragraph = $(this)
-                .children('p .gs-c-promo-summary')
+                .find('.css-1mpkbmj')
                 .text().trim();
+
             console.log(result);
             // Create a new Article using the `result` object built from scraping
-            // db.Article.create(result)
-            //     .then(function (dbArticle) {
-            //         // View the added result in the console
-            //         console.log(dbArticle);
-            //     })
-            //     .catch(function (err) {
-            //         // If an error occurred, log it
-            //         console.log(err);
-            //     });
+            db.Article.create(result)
+                .then(function (dbArticle) {
+                    // View the added result in the console
+                    console.log(dbArticle);
+                })
+                .catch(function (err) {
+                    // If an error occurred, log it
+                    console.log(err);
+                });
         });
     });
 });
