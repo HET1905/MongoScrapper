@@ -60,15 +60,13 @@ app.use(routes);
 // A GET route for scraping the echoJS website
 
 app.get("/scrapArticles", function (req, res) {
+    var articleArray=[];
     axios.get("https://www.espn.com/").then(function (response) {
         var $ = cheerio.load(response.data);
-        // console.log(response.data);
-
+        
         $(".contentItem__content").each(function (i, element) {
-            var result = {};
-
-            // Add the text and href of every link, and save them as properties of the result object
            
+            var result = {};
             result.title = $(this)
                 .find("h1")
                 .text().trim();
@@ -79,73 +77,42 @@ app.get("/scrapArticles", function (req, res) {
                 .find("p")
                 .text().trim();
 
-            console.log(result);
-            // Create a new Article using the `result` object built from scraping
-            db.Article.create(result)
-                .then(function (dbArticle) {
-                    // View the added result in the console
-                    console.log(dbArticle);
-                })
-                .catch(function (err) {
-                    // If an error occurred, log it
-                    console.log(err);
-                });
-
+            // console.log(result);
+            articleArray.push(result);
+           
         });
-
+        console.log(articleArray);
+        return res.send(articleArray);
     });
+    
 
+});
+app.get("/allSavedArticles", function (req, res) {
     db.Article.find({}, function (err, data) {
-        // Log any errors if the server encounters one
         if (err) {
             console.log(err);
         } else {
-            // Otherwise, send the result of this query to the browser
-            res.json(data);
-        }
-    });
-
-
-});
-app.get("/articles", function (req, res) {
-    db.Article.find({}, function (err, data) {
-        // Log any errors if the server encounters one
-        if (err) {
-            console.log(err);
-        } else {
-            // Otherwise, send the result of this query to the browser
-            res.json(data);
+            return res.send(data);
         }
     });
 });
-app.get('/saveArticle/:id',function(req,res){
-    db.Article.find({_id: req.params.id},function(err,data){
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.json(data);
-        }
+app.post('/saveArticle',function(req,res){
+   console.log(req.body);
+   let result = {
+       title : req.body.article.title,
+       link : req.body.article.link,
+       paragraph : req.body.article.paragraph
+   };
+
+    db.Article.create(result)
+    .then(function (dbArticle) {
+        console.log(dbArticle);
     })
-})
-// app.post("/saveArticles/:id", function(req, res) {
-//     // Create a new note and pass the req.body to the entry
-//     db.SavedArticle.create(req.body)
-//       .then(function(dbNote) {
-//         // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-//         // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-//         // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-//         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
-//       })
-//       .then(function(dbArticle) {
-//         // If we were able to successfully update an Article, send it back to the client
-//         res.json(dbArticle);
-//       })
-//       .catch(function(err) {
-//         // If an error occurred, send it to the client
-//         res.json(err);
-//       });
-//   });
+    .catch(function (err) {
+        console.log(err);
+    });
+});
+
   
 
 app.listen(PORT, function () {
