@@ -3,12 +3,29 @@
     padding:0;
 
 }
+.clear{
+    clear: both;
+}
 html,body{
     font-size: 1em;
-    background: #ccc;
+  
 }
 .bg-dark{
     background-color: #210ab0a3 !important;
+}
+
+#backgroundDiv{
+    left: 0;
+    top: 0;
+    background: #ccc url(../images/Espn1.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 700px;
+    background-size: cover;
+    position: fixed;
+    z-index: -100;
+    opacity: 0.7;
+
 }
 .navbar-nav{
     flex-direction: row;
@@ -16,4 +33,56 @@ html,body{
 .nav-item{
     margin-left: 10px;
     padding:0 10px;
+}
+footer{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding:15px 0;
+}
+#NoArticleDiv{
+    width:80%;
+    height: 100px;
+    display: none;
+    font-size: 1.3em;
+    text-align: center;
+    padding:10px;
+    background: rgba(240, 240, 49, 0.734);
+    margin:auto auto;
+}
+#article{
+    padding:10px;
+    width: 80%;
+    margin:auto auto;
+    color: #000;
+    margin-bottom: 80px;
+}
+#article a{
+    color: #fff;
+}
+/* #article p{
+    padding:5px;
+    border:1px solid #000;
+    margin:5px 0;
+
+} */
+
+.dynamicArticle{
+    padding:5px;
+    border:1px solid #000;
+    margin:5px 0;
+    position: relative;
+}
+.saveBtn{
+    /* margin-right: 10px; */
+    /* margin-bottom: 5px; */
+    position: absolute;
+    top:10px;
+    right: 30px;
+
 }

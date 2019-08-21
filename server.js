@@ -60,22 +60,23 @@ app.use(routes);
 // A GET route for scraping the echoJS website
 
 app.get("/scrapArticles", function (req, res) {
-    axios.get("https://www.nytimes.com/section/technology").then(function (response) {
+    axios.get("https://www.espn.com/").then(function (response) {
         var $ = cheerio.load(response.data);
         // console.log(response.data);
 
-        $(".css-imuvyx").each(function (i, element) {
+        $(".contentItem__content").each(function (i, element) {
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
+           
             result.title = $(this)
-                .find("h2")
+                .find("h1")
                 .text().trim();
             result.link = $(this)
                 .find("a")
                 .attr("href");
             result.paragraph = $(this)
-                .find('.css-1mpkbmj')
+                .find("p")
                 .text().trim();
 
             console.log(result);
@@ -89,9 +90,63 @@ app.get("/scrapArticles", function (req, res) {
                     // If an error occurred, log it
                     console.log(err);
                 });
+
         });
+
+    });
+
+    db.Article.find({}, function (err, data) {
+        // Log any errors if the server encounters one
+        if (err) {
+            console.log(err);
+        } else {
+            // Otherwise, send the result of this query to the browser
+            res.json(data);
+        }
+    });
+
+
+});
+app.get("/articles", function (req, res) {
+    db.Article.find({}, function (err, data) {
+        // Log any errors if the server encounters one
+        if (err) {
+            console.log(err);
+        } else {
+            // Otherwise, send the result of this query to the browser
+            res.json(data);
+        }
     });
 });
+app.get('/saveArticle/:id',function(req,res){
+    db.Article.find({_id: req.params.id},function(err,data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.json(data);
+        }
+    })
+})
+// app.post("/saveArticles/:id", function(req, res) {
+//     // Create a new note and pass the req.body to the entry
+//     db.SavedArticle.create(req.body)
+//       .then(function(dbNote) {
+//         // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
+//         // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+//         // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+//         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+//       })
+//       .then(function(dbArticle) {
+//         // If we were able to successfully update an Article, send it back to the client
+//         res.json(dbArticle);
+//       })
+//       .catch(function(err) {
+//         // If an error occurred, send it to the client
+//         res.json(err);
+//       });
+//   });
+  
 
 app.listen(PORT, function () {
     console.log("App now listening at http://localhost:" + PORT);
