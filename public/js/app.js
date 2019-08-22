@@ -7,7 +7,7 @@ $('.btnScrapArticlae').on('click', function () {
         alert(`articles scrapped....`);
         // console.log(data);
         generateAtricles(data);
-       
+
     });
     // window.location.reload();
 
@@ -18,28 +18,30 @@ $(document).on('click', '.saveBtn', function () {
 
     // var thisId = $(this).attr("data-id");
 
-    
-        let article = {
-            title:$(this).parent().find('.articleTitle').text().trim(),
-            link: $(this).parent().find('a').attr('href'),
-            paragraph : $(this).parent().find('.atricleP').text().trim()
-           
-        }
-            
-     console.log(article);   
-     $.ajax({
+
+    let article = {
+        title: $(this).parent().find('.articleTitle').text().trim(),
+        link: $(this).parent().find('a').attr('href'),
+        paragraph: $(this).parent().find('.atricleP').text().trim()
+
+    }
+
+    console.log(article);
+    $.ajax({
         type: "POST",
         url: "/saveArticle",
-        data: {article : article},
-       
-      }).then(function(data){
-        console.log(data);
-      });
+        data: {
+            article: article
+        },
 
-      $(this).parent().remove();
+    }).then(function (data) {
+        console.log(data);
+    });
+
+    $(this).parent().remove();
 });
 
-function generateAtricles(data){
+function generateAtricles(data) {
     console.log(data);
     for (var i = 0; i < data.length; i++) {
         let num = i + 1;
@@ -54,7 +56,7 @@ function generateAtricles(data){
         title.text(data[i].title);
         title.attr('class', 'articleTitle');
 
-        a.text( data[i].link);
+        a.text(data[i].link);
         a.attr('href', data[i].link);
         a.attr('class', 'linkTag');
         p.text(data[i].paragraph);
@@ -67,10 +69,27 @@ function generateAtricles(data){
         $('#article').append(div);
     }
 }
-$(document).on('click','.btnAddNotes',function(){
+
+$(document).on('click', '.btnAddNotes', function () {
     alert($(this).attr('data-id'));
     let id = $(this).attr('data-id');
     $('#exampleModal').modal('show');
     $('.modal-title').text(`Notes for Atrilce Id : ${id}`)
     // $(this).attr('data-target','#exampleModal');
+});
+
+$(document).on('click', '.btnDeleteArticle', function () {
+    let id = $(this).attr('data-id');
+    // alert(id);
+    $.ajax({
+            method: "DELETE",
+            url: "/api/Articles/" + id
+        })
+        .then(function (data) {
+           
+        });
+        alert('Record deleted');
+        location.reload();
+    
+
 })

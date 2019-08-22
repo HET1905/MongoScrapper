@@ -110,6 +110,17 @@ app.post('/saveArticle', function (req, res) {
         });
 });
 
+app.delete("/api/Articles/:id", function(req, res){
+let id= req.params.id;
+db.Article.remove({"_id": id})
+.then(function(data){
+    console.log('Record deleted');
+})
+.catch(function(err){
+    console.log(err);
+});
+});
+
 
 
 app.listen(PORT, function () {
