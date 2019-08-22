@@ -1,5 +1,43 @@
-<h1>Saved Articles</h1>
+<h1 class="text-center">Saved Articles</h1>
 
 <div id="article">
+    {{#each articles}}
+    <div class="hdlbarArticleDiv">
+        <h2>{{title}}</h2>
+        <p>{{link}}</p>
+        <p>{{paragraph}}</p>
+        <div class="btnGroup">
 
+
+            <button class="btn btn-primary btnAddNotes"  data-toggle="modal" data-target="#exampleModal" data-id={{_id}}>Add Notes</button>
+            <button class="btn btn-danger btnDeleteNotes">Delete Notes</button>
+        </div>
+    </div>
+    {{/each}}
+</div>
+            {{!-- <button class="btn btn-primary btnAddNotes" data-toggle="modal" data-target="#exampleModal" data-id={{_id}}>Add Notes</button> --}}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div>
+              Area for list of notes
+          </div>
+      <textarea rows="6" cols="63" id="txtNotes"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save Notes</button>
+      </div>
+    </div>
+  
+  </div>
 </div>

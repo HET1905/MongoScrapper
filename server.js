@@ -1,7 +1,5 @@
 var express = require("express");
-// var logger = require("morgan");
 var mongoose = require("mongoose");
-
 
 var axios = require("axios");
 var cheerio = require("cheerio");
@@ -20,10 +18,6 @@ app.engine("handlebars", exphbs({
     defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
-
-
-// Use morgan logger for logging requests
-// app.use(logger("dev"));
 
 // Parse request body as JSON
 app.use(express.urlencoded({
@@ -49,23 +43,17 @@ mongoose.connect(MONGODB_URI, {
 });
 
 
-// Import routes and give the server access to them.
-var routes = require("./api-routes/routes.js");
-
-app.use(routes);
-
-
-// Routes
-
-// A GET route for scraping the echoJS website
+app.get("/", function (req, res) {
+    res.render('index');
+});
 
 app.get("/scrapArticles", function (req, res) {
-    var articleArray=[];
+    var articleArray = [];
     axios.get("https://www.espn.com/").then(function (response) {
         var $ = cheerio.load(response.data);
-        
+
         $(".contentItem__content").each(function (i, element) {
-           
+
             var result = {};
             result.title = $(this)
                 .find("h1")
@@ -78,42 +66,51 @@ app.get("/scrapArticles", function (req, res) {
                 .text().trim();
 
             // console.log(result);
-            articleArray.push(result);
-           
+            if(result.title){
+                articleArray.push(result);
+            }
+            
+
         });
-        console.log(articleArray);
+        // console.log(articleArray);
         return res.send(articleArray);
     });
-    
+
 
 });
-app.get("/allSavedArticles", function (req, res) {
+
+app.get("/savedAritcles", function (req, res) {
     db.Article.find({}, function (err, data) {
         if (err) {
             console.log(err);
         } else {
-            return res.send(data);
+
+            res.render('savedAritcles', {
+                articles: data
+            });
         }
     });
 });
-app.post('/saveArticle',function(req,res){
-   console.log(req.body);
-   let result = {
-       title : req.body.article.title,
-       link : req.body.article.link,
-       paragraph : req.body.article.paragraph
-   };
+
+
+app.post('/saveArticle', function (req, res) {
+    console.log(req.body);
+    let result = {
+        title: req.body.article.title,
+        link: req.body.article.link,
+        paragraph: req.body.article.paragraph
+    };
 
     db.Article.create(result)
-    .then(function (dbArticle) {
-        console.log(dbArticle);
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
+        .then(function (dbArticle) {
+            console.log(dbArticle);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 });
 
-  
+
 
 app.listen(PORT, function () {
     console.log("App now listening at http://localhost:" + PORT);

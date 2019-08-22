@@ -1,21 +1,11 @@
 var savedArticle = [];
 
-// $.getJSON('/articles', function (data) {
-//     if (data.length === 0) {
-//         $('#NoArticleDiv').show();
-//     } else {
-//         $('#NoArticleDiv').hide();
-//     }
-//     console.log(data);
-//     generateAtricles(data);
-    
-// });
 $('.btnScrapArticlae').on('click', function () {
 
     $.get('/scrapArticles', function (data) {
-        console.log(data);
+        // console.log(data);
         alert(`articles scrapped....`);
-        console.log(data);
+        // console.log(data);
         generateAtricles(data);
        
     });
@@ -23,13 +13,6 @@ $('.btnScrapArticlae').on('click', function () {
 
 });
 
-$('.btnSavedArticle').on('click',function(){
-    // alert('it works');
-    $.get('/allSavedArticles',function(data){
-        console.log(data);
-        generateAtricles(data);
-    })
-})
 
 $(document).on('click', '.saveBtn', function () {
 
@@ -38,12 +21,11 @@ $(document).on('click', '.saveBtn', function () {
     
         let article = {
             title:$(this).parent().find('.articleTitle').text().trim(),
-            link: $(this).parent().find('a').attr('href').trim(),
+            link: $(this).parent().find('a').attr('href'),
             paragraph : $(this).parent().find('.atricleP').text().trim()
            
         }
-            // savedArticle.push(article);
-            // console.log(savedArticle);
+            
      console.log(article);   
      $.ajax({
         type: "POST",
@@ -54,8 +36,7 @@ $(document).on('click', '.saveBtn', function () {
         console.log(data);
       });
 
-
-
+      $(this).parent().remove();
 });
 
 function generateAtricles(data){
@@ -84,6 +65,12 @@ function generateAtricles(data){
 
         div.append(title, a, p, savtBtn);
         $('#article').append(div);
-
     }
 }
+$(document).on('click','.btnAddNotes',function(){
+    alert($(this).attr('data-id'));
+    let id = $(this).attr('data-id');
+    $('#exampleModal').modal('show');
+    $('.modal-title').text(`Notes for Atrilce Id : ${id}`)
+    // $(this).attr('data-target','#exampleModal');
+})
