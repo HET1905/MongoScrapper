@@ -3,6 +3,6 @@
 module.exports = {
     Article: require("./Article"),
    
-    Note: require("./Notes")
+    Notes: require("./Notes")
   };
   

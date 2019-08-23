@@ -38,7 +38,7 @@ mongoose.connect(MONGODB_URI, {
     if (err) {
         console.log(err)
     } else {
-        console.log('Mongo db connected');
+        // console.log('Mongo db connected');
     }
 });
 
@@ -65,14 +65,12 @@ app.get("/scrapArticles", function (req, res) {
                 .find("p")
                 .text().trim();
 
-            // console.log(result);
-            if(result.title){
+            if (result.title) {
                 articleArray.push(result);
             }
-            
+
 
         });
-        // console.log(articleArray);
         return res.send(articleArray);
     });
 
@@ -103,22 +101,55 @@ app.post('/saveArticle', function (req, res) {
 
     db.Article.create(result)
         .then(function (dbArticle) {
-            console.log(dbArticle);
+            // console.log(dbArticle);
         })
         .catch(function (err) {
             console.log(err);
         });
 });
 
-app.delete("/api/Articles/:id", function(req, res){
-let id= req.params.id;
-db.Article.remove({"_id": id})
-.then(function(data){
-    console.log('Record deleted');
-})
-.catch(function(err){
-    console.log(err);
+app.delete("/api/Articles/:id", function (req, res) {
+    let id = req.params.id;
+    db.Article.remove({
+            "_id": id
+        })
+        .then(function (data) {
+            console.log('Record deleted');
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 });
+
+app.post('/saveNote/:id',function(req,res){
+    let newNote={
+        articleId:req.body.note.articleId,
+        body:req.body.note.body
+    }
+    // console.log(newNote);
+    db.Notes.create(newNote)
+    .then(function(data) {
+      
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNotes._id }, { new: true });
+    })
+    .then(function(data) {
+      res.json(data);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+
+});
+
+app.get('/api/notes/:id',function(req,res){
+    let id = req.params.id;
+    db.Notes.find({articleId:id},function(err,data){
+        if(err){
+            console.log(err);
+        }else{
+            res.send(data);
+        }
+    });
 });
 
 

@@ -34,6 +34,10 @@ html,body{
     margin-left: 10px;
     padding:0 10px;
 }
+.navbar-nav li a:hover{
+    background: #868490a3;
+    color: #000;
+}
 footer{
     position: fixed;
     height: 50px;
@@ -65,37 +69,54 @@ footer{
 #article a{
     color: #fff;
 }
-/* #article p{
-    padding:5px;
-    border:1px solid #000;
-    margin:5px 0;
 
-} */
 
 .dynamicArticle{
-    padding:5px;
+    min-height: 100px;
     border:1px solid #000;
+    background: rgba(252, 252, 250, 0.734); 
+    border-radius: 5px;
     margin:5px 0;
     position: relative;
 }
 .saveBtn{
-    /* margin-right: 10px; */
-    /* margin-bottom: 5px; */
+  
     position: absolute;
-    top:10px;
+    bottom:10px;
     right: 30px;
 
 }
+#saveContainer{
+    width: 80%;
+    margin:auto auto;
+}
 .hdlbarArticleDiv{
     width:80%;
+    min-height: 100px;
     border:1px solid #000;
-    padding:5px;
+    border-radius: 5px;
+    /* padding:5px; */
+    background: rgba(252, 252, 250, 0.734);
     margin:5px 0;
     position: relative;
 }
-.hdlbarArticleDiv p{
+.hdlbarArticleDiv p,.dynamicArticle p{
     width:70%;
+    padding-left: 10px;
 }
+#articleTitle,.articleTitle{
+    background: #6b55faa3;
+    padding:5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+.articleLink,#article a.linkTag{
+    color: rgb(0, 0, 181);
+    padding-left: 5px;
+    cursor: pointer;
+}
+
 .btnGroup{
     position: absolute;
     float:right;
@@ -103,7 +124,37 @@ footer{
     bottom: 10px;
 
 }
-
+.modal-content{
+    height: 500px;
+}
 .modal-body{
     height: 200px;
+}
+#exampleModalLabel,.modal-title{
+    
+    font-size: 1em;
+}
+#exampleModalLabel{
+    padding-left: 5px;
+}
+.articleNoteNum{
+    text-align: center;
+}
+.articleNoteNum:hover{
+    cursor: pointer;
+    background: #ccc;
+}
+#listOfNotes{
+    padding:2px;
+    border:1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.fa{
+    margin-left: 70px;
+    color: red;
+
+}
+.fa:hover{
+    cursor: pointer;
 }

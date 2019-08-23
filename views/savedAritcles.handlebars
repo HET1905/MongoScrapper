@@ -1,10 +1,13 @@
+<div id="saveContainer">
+
+
 <h1 class="text-center">Saved Articles</h1>
 
 <div id="article">
     {{#each articles}}
     <div class="hdlbarArticleDiv">
-        <h2>{{title}}</h2>
-        <p>{{link}}</p>
+        <h2 id="articleTitle">{{title}}</h2>
+        <p class="articleLink">{{link}}</p>
         <p>{{paragraph}}</p>
         <div class="btnGroup">
 
@@ -15,6 +18,7 @@
     </div>
     {{/each}}
 </div>
+</div>
             {{!-- <button class="btn btn-primary btnAddNotes" data-toggle="modal" data-target="#exampleModal" data-id={{_id}}>Add Notes</button> --}}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -22,6 +26,7 @@
       
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title">Notes for the article :</h5>
         <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -29,13 +34,16 @@
       </div>
       <div class="modal-body">
           <div>
-              Area for list of notes
+             <h3>List of notes</h3>
+             <div id="listOfNotes">
+
+             </div>
           </div>
-      <textarea rows="6" cols="63" id="txtNotes"></textarea>
+      <textarea rows="6" cols="63" id="txtNotes" placeholder="Writes your notes here..."></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save Notes</button>
+        <button type="button" class="btn btn-primary btnSaveNotes">Save Notes</button>
       </div>
     </div>
   
