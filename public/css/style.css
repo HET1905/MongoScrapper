@@ -14,6 +14,10 @@ body {
 
 }
 
+body {
+    background-image: linear-gradient(to bottom, #820b31, #6f2a1e, #59381d, #473d2b, #3e3e3d);
+}
+
 .bg-dark {
     background-color: #210ab0a3 !important;
 }
@@ -204,6 +208,6 @@ footer {
 
     #backgroundDiv {
         min-height: 100vh;
-        overflow: auto;
+        /* overflow: auto; */
     }
 }
