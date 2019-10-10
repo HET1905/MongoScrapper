@@ -1,44 +1,53 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
 
 }
-.clear{
+
+.clear {
     clear: both;
 }
-html,body{
+
+html,
+body {
     font-size: 1em;
-  
+
 }
-.bg-dark{
+
+.bg-dark {
     background-color: #210ab0a3 !important;
 }
 
-#backgroundDiv{
+#backgroundDiv {
     left: 0;
     top: 0;
     background: #ccc url(../images/Espn1.jpg);
     background-repeat: no-repeat;
     width: 100%;
     min-height: 700px;
+    background-position: center center;
     background-size: cover;
     position: fixed;
     z-index: -100;
     opacity: 0.7;
-
+    /* background: #ccc url('../images/Espn1.jpg') center center cover no-repeat fixed; */
 }
-.navbar-nav{
+
+.navbar-nav {
     flex-direction: row;
 }
-.nav-item{
+
+.nav-item {
     margin-left: 10px;
-    padding:0 10px;
+    padding: 0 10px;
 }
-.navbar-nav li a:hover{
+
+.navbar-nav li a:hover {
     background: #868490a3;
     color: #000;
 }
-footer{
+
+footer {
     position: fixed;
     height: 50px;
     width: 100%;
@@ -47,114 +56,152 @@ footer{
     background: #000;
     color: #fff;
     text-align: center;
-    padding:15px 0;
+    padding: 15px 0;
 }
-#NoArticleDiv{
-    width:80%;
+
+#NoArticleDiv {
+    width: 80%;
     height: 100px;
     display: none;
     font-size: 1.3em;
     text-align: center;
-    padding:10px;
+    padding: 10px;
     background: rgba(240, 240, 49, 0.734);
-    margin:auto auto;
+    margin: auto auto;
 }
-#article{
-    padding:10px;
+
+#article {
+    padding: 10px;
     width: 80%;
-    margin:auto auto;
+    margin: auto auto;
     color: #000;
     margin-bottom: 80px;
 }
-#article a{
+
+#article a {
     color: #fff;
 }
 
 
-.dynamicArticle{
+.dynamicArticle {
     min-height: 100px;
-    border:1px solid #000;
-    background: rgba(252, 252, 250, 0.734); 
+    border: 1px solid #000;
+    background: rgba(252, 252, 250, 0.734);
     border-radius: 5px;
-    margin:5px 0;
+    margin: 5px 0;
     position: relative;
 }
-.saveBtn{
-  
+
+.saveBtn {
+
     position: absolute;
-    bottom:10px;
+    bottom: 10px;
     right: 30px;
 
 }
-#saveContainer{
+
+#saveContainer {
     width: 80%;
-    margin:auto auto;
+    margin: auto auto;
 }
-.hdlbarArticleDiv{
-    width:80%;
+
+.hdlbarArticleDiv {
+    width: 80%;
     min-height: 100px;
-    border:1px solid #000;
+    border: 1px solid #000;
     border-radius: 5px;
     /* padding:5px; */
     background: rgba(252, 252, 250, 0.734);
-    margin:5px 0;
+    margin: 5px 0;
     position: relative;
 }
-.hdlbarArticleDiv p,.dynamicArticle p{
-    width:70%;
+
+.hdlbarArticleDiv p,
+.dynamicArticle p {
+    width: 70%;
     padding-left: 10px;
 }
-#articleTitle,.articleTitle{
+
+#articleTitle,
+.articleTitle {
     background: #6b55faa3;
-    padding:5px;
+    padding: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
 }
-.articleLink,#article a.linkTag{
+
+.articleLink,
+#article a.linkTag {
     color: rgb(0, 0, 181);
     padding-left: 5px;
     cursor: pointer;
 }
 
-.btnGroup{
+.btnGroup {
     position: absolute;
-    float:right;
+    float: right;
     right: 10px;
     bottom: 10px;
 
 }
-.modal-content{
+
+.modal-content {
     height: 500px;
 }
-.modal-body{
+
+.modal-body {
     height: 200px;
 }
-#exampleModalLabel,.modal-title{
-    
+
+#exampleModalLabel,
+.modal-title {
+
     font-size: 1em;
 }
-#exampleModalLabel{
+
+#exampleModalLabel {
     padding-left: 5px;
 }
-.articleNoteNum{
+
+.articleNoteNum {
     text-align: center;
 }
-.articleNoteNum:hover{
+
+.articleNoteNum:hover {
     cursor: pointer;
     background: #ccc;
 }
-#listOfNotes{
-    padding:2px;
-    border:1px solid #000;
+
+#listOfNotes {
+    padding: 2px;
+    border: 1px solid #000;
     border-radius: 5px;
     margin-bottom: 5px;
 }
-.fa{
+
+.fa {
     margin-left: 70px;
     color: red;
 
 }
-.fa:hover{
+
+.fa:hover {
     cursor: pointer;
+}
+
+@media only screen and (max-width:420px) {
+
+    .hdlbarArticleDiv,
+    #article {
+        width: 100%;
+    }
+
+    .hdlbarArticleDiv {
+        min-height: 300px;
+    }
+
+    #backgroundDiv {
+        min-height: 100vh;
+    }
 }
