@@ -15,7 +15,7 @@ body {
 }
 
 body {
-    background-image: linear-gradient(to bottom, #820b31, #6f2a1e, #59381d, #473d2b, #3e3e3d);
+    background-image: linear-gradient(to top, #9c0000, #6b2300, #432400, #241b00, #0b0b01);
 }
 
 .bg-dark {
@@ -202,6 +202,10 @@ footer {
         width: 100%;
     }
 
+    #articleTitle {
+        font-size: 1.2em;
+    }
+
     .hdlbarArticleDiv {
         min-height: 300px;
     }
@@ -209,5 +213,17 @@ footer {
     #backgroundDiv {
         min-height: 100vh;
         /* overflow: auto; */
+    }
+
+    .hdlbarArticleDiv p {
+        width: 95%;
+    }
+
+    p.articleLink {
+        width: 95%;
+    }
+
+    p {
+        /* margin-bottom: 2.5rem; */
     }
 }
