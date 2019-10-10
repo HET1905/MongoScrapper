@@ -223,7 +223,11 @@ footer {
         width: 95%;
     }
 
-    p {
-        /* margin-bottom: 2.5rem; */
+    .modal {
+        width: 80%;
+    }
+
+    textarea {
+        width: 100%;
     }
 }
