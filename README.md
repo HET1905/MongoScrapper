@@ -1,10 +1,10 @@
-# MongoScrapper
+# [MongoScrapper](https://ancient-plateau-32340.herokuapp.com/)
 
-    Link : https://ancient-plateau-32340.herokuapp.com/
+Link : (https://ancient-plateau-32340.herokuapp.com/)
 
+---
 
-
-    Mongo Scrapper app is Node, Express, MongoDB app to scrape articles from ESPN website and save selected articles in database. On saved articles user can add notes or they can remove notes or articles.
+Mongo Scrapper app is Node, Express, MongoDB app to scrape articles from ESPN website and save selected articles in database. On saved articles user can add notes or they can remove notes or articles.
 
 ## Technology used
 

@@ -24,7 +24,8 @@ body {
     background: #ccc url(../images/Espn1.jpg);
     background-repeat: no-repeat;
     width: 100%;
-    min-height: 700px;
+    /* min-height: 700px; */
+    min-height: 100vh;
     background-position: center center;
     background-size: cover;
     position: fixed;
@@ -203,5 +204,6 @@ footer {
 
     #backgroundDiv {
         min-height: 100vh;
+        overflow: auto;
     }
 }
